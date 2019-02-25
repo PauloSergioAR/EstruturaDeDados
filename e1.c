@@ -90,6 +90,32 @@ Lista* concatena(Lista* l1, Lista* l2){
 	return l1;
 }
 
+Lista* getAnterior(Lista* l, Lista* n){
+	Lista* p = l;
+	
+	while(p != NULL){
+		if(p->prox == n){
+			return p;
+		}
+	}
+}
+
+Lista* retira_n(Lista* l, int n){
+	Lista* p = l;
+	Lista* anterior;
+	Lista* aux;
+	
+	while(p->prox != NULL){
+		if(p->info == n){
+			p = getAnterior(l, p);
+			aux = p->prox->prox;
+			p->prox = aux;
+			free(aux);
+		}
+		p = p->prox;
+	}
+}
+
 int main(){
 	Lista* lista = inicializa();
 	Lista* ultimo;
