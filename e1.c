@@ -90,37 +90,41 @@ Lista* concatena(Lista* l1, Lista* l2){
 	return l1;
 }
 
-Lista* getAnterior(Lista* l, Lista* n){
+Lista* retira(Lista* l, int n){
 	Lista* p = l;
+	Lista* anterior = NULL;
+	Lista* aux;
+	Lista* removable;
+	int cont = 0;
 	
 	while(p != NULL){
-		if(p->prox == n){
-			return p;
-		}
-	}
-}
-
-Lista* retira_n(Lista* l, int n){
-	Lista* p = l;
-	Lista* anterior;
-	Lista* aux;
-	
-	while(p->prox != NULL){
 		if(p->info == n){
-			p = getAnterior(l, p);
-			aux = p->prox->prox;
-			p->prox = aux;
-			free(aux);
+			aux = p->prox;
+			removable = p;
+			
+			if(anterior != NULL)	{
+				p = anterior;
+				p->prox = aux;
+				free(removable);
+			} else {				
+				p = p->prox;
+				//free(removable);
+			}
+			
 		}
+		cont ++;
+		anterior = p;
 		p = p->prox;
 	}
+	
+	return l;
 }
 
 int main(){
 	Lista* lista = inicializa();
 	Lista* ultimo;
 	
-	Lista* lista2 = inicializa()	;
+	Lista* lista2 = inicializa();
 	
 	int i = 0;
 	int j = 10;
@@ -134,6 +138,12 @@ int main(){
 	}
 	
 	lista = concatena(lista, lista2);		
+	
+	lista = retira(lista, 9);
+//	lista = retira(lista, 4);
+//	lista = retira(lista, 3);
+	//lista = retira(lista, 2);
+	//lista = retira(lista, 1);
 	
 	imprime(lista);	
 }
