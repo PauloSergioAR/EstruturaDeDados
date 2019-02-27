@@ -120,9 +120,25 @@ Lista* retira(Lista* l, int n){
 	return l;
 }
 
+Lista* separa(Lista* l, int n){
+	Lista* p  = l;
+	Lista* l2 = NULL;
+	
+	while(p != NULL){
+		if(p->info == n){
+			l2 = p->prox;
+			p->prox = NULL;
+			return l2;
+		}
+		p = p->prox;
+	}
+	return l2;
+}
+
 int main(){
 	Lista* lista = inicializa();
 	Lista* ultimo;
+	Lista* segunda = NULL;
 	
 	Lista* lista2 = inicializa();
 	
@@ -139,27 +155,12 @@ int main(){
 	
 	lista = concatena(lista, lista2);		
 	
-	lista = retira(lista, 25);
-//	lista = retira(lista, 8);
-//	lista = retira(lista, 7);
-//	lista = retira(lista, 6);
-//	lista = retira(lista, 5);
-//	lista = retira(lista, 4);
-//	lista = retira(lista, 3);
-//	lista = retira(lista, 2);
-//	lista = retira(lista, 1);
-//	lista = retira(lista, 0);
-//	lista = retira(lista, 19);
-//	lista = retira(lista, 18);
-//	lista = retira(lista, 17);
-//	lista = retira(lista, 16);
-//	lista = retira(lista, 15);
-//	lista = retira(lista, 14);
-//	lista = retira(lista, 13);
-//	lista = retira(lista, 12);
-//	lista = retira(lista, 12);
-//	lista = retira(lista, 11);
-//	lista = retira(lista, 10);
-	
+//	lista = retira(lista, 25);
+
+	segunda = separa(lista, 10);
+	printf("Lista1: ");
 	imprime(lista);	
+	
+	printf("\nLista2: ");
+	imprime(segunda);
 }
